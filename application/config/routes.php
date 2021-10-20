@@ -58,3 +58,5 @@ $route['home/search'] = 'peminjamanController/search';
 
 $route['peminjaman/(:num)'] = 'peminjamanController/viewDetailPeminjaman/$1';
 $route['peminjaman/success'] = 'peminjamanController/peminjamanBerhasil';
+$route['register'] = 'PendaftaranController';
+$route['login'] = 'LoginController';

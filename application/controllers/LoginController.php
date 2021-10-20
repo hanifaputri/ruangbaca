@@ -17,7 +17,7 @@ class LoginController extends CI_Controller {
             if ($data==false){
                $this->session->set_flashdata('pesan','
                     <div class="alert alert-danger" role="alert">
-                    <span>Invalid data</span> 
+                    <span>Data email dan password salah</span> 
                     </div>
                 ');
                 $this->load->view('viewLogin');

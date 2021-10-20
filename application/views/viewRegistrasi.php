@@ -21,14 +21,18 @@
 </head>
 <body>
 
-<body class="bg-gradient-primary">
+<body class="bg-gray-100">
 
-<div class="container">
+<div class="container p-4">
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
-
         <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="d-none d-sm-block mt-4">
+            <a href="<?= base_url() ?>">
+                <img class="img-fluid" style="height:32px;" src="<?php echo base_url() ?>assets/img/logo_horizontal.png" />
+            </a>
+            </div>
 
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
@@ -41,7 +45,7 @@
                                     <h1 class="h4 text-gray-900 mb-4">Registrasi Akun</h1>
                                 </div>
                                     <form method="post">
-                                        <table width="300" align="center" border="0" cellspacing="5" cellpadding="5">
+                                        <table align="center" border="0" cellspacing="5" cellpadding="5">
                                             <tr>
                                                 <td colspan="2"><?php echo @$error; ?></td>
                                             </tr>	
@@ -60,11 +64,15 @@
                                             <?php echo $this->session->flashdata('pesan') ?>
                                             <tr>
                                                 <td colspan="2" align="right">
-                                                <input style="height:45px;width:200px" type="submit" name="Registrasi" class="btn btn-primary" value="Daftar"/>
+                                                <input type="submit" name="Registrasi" class="btn btn-block btn-primary" value="Daftar"/>
                                                 </td>
                                             </tr>
                                         </table>
+                                        <div class="mt-4">
+                                            <span>Sudah punya akun? <a href="<?= base_url('/login') ?>">Masuk</a></span>
+                                        </div>
                                     </form>
+                                    
                                 </div>
                             </div>
                         </div>

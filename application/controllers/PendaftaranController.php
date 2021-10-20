@@ -25,7 +25,13 @@ class PendaftaranController extends CI_Controller {
                 $this->load->view('viewRegistrasi');
             } else {
                 $this->Pengguna->submitDataUser($namaUser,$emailUser,$password);
-                $this->load->view('viewRegistrasiBerhasil');
+                $this->session->set_flashdata('pesan','
+                    <div class="alert alert-success" role="alert">
+                    <span>Anda berhasil terdaftar. Silahkan login untuk masuk</span> 
+                    </div>
+                ');
+                redirect('/login');
+                // $this->load->view('viewRegistrasiBerhasil');
             }
         } else {
             $this->load->view('viewRegistrasi');

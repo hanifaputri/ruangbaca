@@ -71,7 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                                         </div>
 
-                                        <!-- Logout Modal-->
+                                        <!-- Peminjaman Modal-->
                                         <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                             aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">

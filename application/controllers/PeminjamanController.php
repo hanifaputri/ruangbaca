@@ -21,6 +21,14 @@ class PeminjamanController extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
+		if (!$this->session->has_userdata('nama')){
+            $this->session->set_flashdata('pesan','
+                <div class="alert alert-danger" role="alert">
+                <span>Anda belum login!</span> 
+                </div>s
+            ');
+            redirect('login');
+        }
 
 		// Load model
 		$this->load->model('buku');

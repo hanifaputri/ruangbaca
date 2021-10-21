@@ -25,7 +25,7 @@ class PeminjamanController extends CI_Controller {
             $this->session->set_flashdata('pesan','
                 <div class="alert alert-danger" role="alert">
                 <span>Anda belum login!</span> 
-                </div>s
+                </div>
             ');
             redirect('login');
         }

@@ -51,15 +51,15 @@
                                             </tr>	
                                             <tr>
                                                 <td width="100">Name</td>
-                                                <td width="329"><input type="text" class="form-control" name="NAMA_USER"/></td>
+                                                <td width="329"><input type="text" class="form-control" name="NAMA_USER" required/></td>
                                             </tr>
                                             <tr>
                                                 <td>Email</td>
-                                                <td><input type="text" class="form-control" name="EMAIL_USER"/></td>
+                                                <td><input type="text" class="form-control" name="EMAIL_USER" required/></td>
                                             </tr>
                                             <tr>
                                                 <td>Password</td>
-                                                <td><input type="password" class="form-control" name="PASSWORD_USER"/></td>
+                                                <td><input type="password" class="form-control" name="PASSWORD_USER" required/></td>
                                             </tr>
                                             <?php echo $this->session->flashdata('pesan') ?>
                                             <tr>

@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
                     <!-- Logo -->
                     <div class="d-sm-inline-block">
                     <a href="<?= base_url() ?>">

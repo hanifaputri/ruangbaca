@@ -22,8 +22,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-lg-4 text-center">
                     <img class="rounded img-thumbnail" style="width:100%" src="<?= $b->URL_IMG_BUKU?>"/>
                    
-                    <input id="isbn" type="hidden" value="<?= $b->ISBN?>"/>
-                    <svg id="barcode" jsbarcode-value="<?= $b->ISBN?>"></svg>
 
                 </div>
                 <div class="col-lg-8">
@@ -46,6 +44,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <tr>
                             <td>Bahasa</td>
                             <td><?= $b->NAMA_BAHASA?></td>
+                        </tr>
+                        <tr>
+                            <td>ISBN</td>
+                            <td>
+                                <input id="isbn" type="hidden" value="<?= $b->ISBN?>"/>
+                                <svg id="barcode" jsbarcode-value="<?= $b->ISBN?>"></svg>
+                            </td>
                         </tr>
                     </table>
 

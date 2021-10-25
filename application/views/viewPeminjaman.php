@@ -105,10 +105,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <h6 class="font-weight-bold text-gray-900"><?= $b->JUDUL_BUKU?></h6>
                     <p class="m-0"><?php echo ($b->STATUS_BUKU=='Tersedia')? "<span>Tersedia</span>": "<span class='text-danger'>Tidak Tersedia</span>"; ?></p>
                 </div>
-                <div class="card-footer">
-                    <a href="<?= base_url('/peminjaman/' . $b->ID_BUKU);?>">
-                    <button type="button" class="btn btn-block btn-primary" <?php echo ($b->STATUS_BUKU=='Tersedia')? '' : 'disabled';?> >Pinjam Buku</button>
-                    </a>
+                <!-- <div class="card-footer row"> -->
+                <div class="card-footer btn-toolbar">
+                    <!-- <div class="col-xs-4 p-0"> -->
+                    <div class="btn-group">
+                        <!-- Button Lihat -->
+                        <a href="<?= base_url('/peminjaman/' . $b->ID_BUKU);?>">
+                            <button type="button" class="btn btn-secondary" <?php echo ($b->STATUS_BUKU=='Tersedia')? '' : 'disabled';?> >
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </a>
+                    </div>
+                    <!-- <div class="col-xs-8 p-0"> -->
+                    <div class="btn-group ml-2">
+                        <!-- Button Pinjam -->
+                        <a class="btn btn-block btn-primary" 
+                        onClick="window.location='<?= base_url('/peminjamanController/addToCart/'. $b->ID_BUKU)?>'">
+                            <i class="fas fa-plus mr-2"></i>
+                            Pinjam
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

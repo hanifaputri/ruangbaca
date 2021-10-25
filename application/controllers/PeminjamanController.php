@@ -39,8 +39,10 @@ class PeminjamanController extends CI_Controller {
 	public function index()
 	{
 		$data['buku'] = $this->buku->getBuku();
+		// $this->cart->destroy();
+		// var_dump($this->cart->contents());
 
-		// echo var_dump($data['buku']);
+		// var_dump($data['buku']);
 		$data['title'] = "Eksplor Buku";
 		$this->load->view('header', $data);
 		$this->load->view('viewPeminjaman', $data);
@@ -105,5 +107,29 @@ class PeminjamanController extends CI_Controller {
 		$this->load->view('header', $data);
 		$this->load->view('viewPeminjamanBerhasil');
 		$this->load->view('footer');
+	}
+
+	public function addToCart($id)
+	{
+		$book = $this->buku->getCartDetailById($id);
+		$data = array(
+			'id' => $book->ID_BUKU,
+			'qty' => 1,
+			'price' => 0,
+			'name' => $book->JUDUL_BUKU,
+			'options' => array(
+				'imgUrl' => $book->URL_IMG_BUKU
+			)
+		);
+
+		$this->cart->insert($data);
+		redirect('/home');
+		// var_dump($data);
+	}
+
+	public function resetCart()
+	{
+		$this->cart->destroy();
+		redirect('/home');
 	}
 }

@@ -55,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <!-- <button type="button" class="btn btn-info"> -->
                                     Daftar Peminjamanmu
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-success ml-2">3+</span>
+                                <span class="badge badge-success ml-2"><?= sizeOf($this->cart->contents()) ?></span>
                                 <!-- </button> -->
                             </a>
                             <!-- Dropdown - Alerts -->
@@ -65,27 +65,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     Daftar Peminjaman
                                 </h6>
                                 <!-- List Start -->
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <!-- Book Image -->
-                                    <div class="mr-3">
-                                        <img class="rounded img-thumbnail" style="width:72px;" src="https://ebooks.gramedia.com/ebook-covers/30371/big_covers/ID_GPU2016MTH01HUJA_B.jpg"/>
+                                <?php $i = 0; ?>
+                                <?php foreach ($this->cart->contents() as $item): ?>
+                                    <a class="dropdown-item d-flex align-items-center">
+                                        <!-- Book Image -->
+                                        <div class="mr-3">
+                                            <img class="bg-gray-100 rounded border p-1 " style="width:72px;" src="<?= $item['options']['imgUrl'] ?>"/>
+                                        </div>
+                                        <div class="mr-3 flex-grow-1">
+                                            <h6 class="font-weight-bold"><?= $item['name'] ?></h6>
+                                            <div class="text-gray-500">ID= <?= $item['id'] ?></div>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </a>
+                                <?php $i++; ?>
+                                <?php endforeach; ?>
+                                
+                                <?php if ($i==0):?>
+                                    <!-- Empty State -->
+                                    <div class="d-flex flex-column align-items-center" href="#">
+                                        <img style="width:128px;" src="<?php echo base_url("assets/img/empty_cart.png"); ?>" />
+                                        <p>Tidak ada peminjaman</p>
                                     </div>
-                                    <div class="mr-3 flex-grow-1 ">
-                                        <h6 class="font-weight-bold">Hujan</h6>
-                                        <div class="text-gray-500">Tere Liye</div>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-danger">
-                                        <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </a>
-                              
-                                <!-- Empty State -->
-                                <a class="dropdown-item d-flex flex-column align-items-center" href="#">
-                                    <img style="width:128px;" src="<?php echo base_url("assets/img/empty_cart.png"); ?>" />
-                                    <p>Tidak ada peminjaman</p>
-                                </a>
+                                <?php endif; ?>
 
                                 <!--
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -111,7 +117,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </div>
                                 </a>
                                 -->
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Lihat Semua Peminjaman</a>
+                                <a style="cursor:pointer;" sclass="dropdown-item text-center small text-gray-500"
+                                onClick="window.location='<?= base_url('/peminjamanController/resetCart');?>'">
+                                    Lihat Semua Peminjaman
+                                </a>
                             </div>
                         </li>
 

@@ -31,16 +31,27 @@ class Buku extends CI_Model {
         return $query->result();
     }
 
-    public function getBukuById($idBuku){
+    public function getBukuById($id){
         $query = $this->db->query("
-        SELECT BUKU.ID_BUKU, BUKU.ISBN, BUKU.JUDUL_BUKU, BUKU.URL_IMG_BUKU, BUKU.ID_PENERBIT, PENERBIT.NAMA_PENERBIT, BUKU.ID_KATEGORI, KATEGORI.NAMA_KATEGORI, BUKU.ID_BAHASA, BAHASA.NAMA_BAHASA FROM BUKU
+        SELECT BUKU.ID_BUKU, BUKU.ISBN, BUKU.JUDUL_BUKU, BUKU.URL_IMG_BUKU, BUKU.ID_PENERBIT, PENERBIT.NAMA_PENERBIT, BUKU.ID_KATEGORI, KATEGORI.NAMA_KATEGORI, BUKU.ID_BAHASA, BAHASA.NAMA_BAHASA 
+        FROM BUKU
         INNER JOIN PENERBIT ON BUKU.ID_PENERBIT = PENERBIT.ID_PENERBIT
         INNER JOIN KATEGORI ON BUKU.ID_KATEGORI = KATEGORI.ID_KATEGORI
         INNER JOIN BAHASA ON BUKU.ID_BAHASA = BAHASA.ID_BAHASA
-        WHERE BUKU.ID_BUKU = '$idBuku'
+        WHERE BUKU.ID_BUKU = '$id'
         LIMIT 1;");
 
         return $query->result();
+    }
+
+    public function getCartDetailById($id){
+        $query = $this->db->query("
+        SELECT ID_BUKU, JUDUL_BUKU, URL_IMG_BUKU 
+        FROM BUKU
+        WHERE ID_BUKU = '$id';
+        ");
+
+        return $query->row();
     }
 
     public function searchByQuery($keyword){

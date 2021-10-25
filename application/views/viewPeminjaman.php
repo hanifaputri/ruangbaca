@@ -98,7 +98,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- Content Row -->
     <div class="row mt-4">
-
         <!-- Book -->
         <?php foreach($buku as $b) : ?>
         <div class="col-xl-2 col-md-3 col-sm-4 mb-4">
@@ -149,6 +148,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php endforeach; ?>
     </div>
 
+    <!-- Empty State -->
+    <div class="d-flex flex-column align-items-center" style="height:400px" href="#">
+        <img style="width:256px;" src="<?php echo base_url("assets/img/empty_search.png"); ?>" />
+        <h5>Oops, hasil tidak ditemukan:(</h5>
+        <p class="text-center">Kami tidak dapat menemukan hasil pencarianmu. Mungkin kamu typo?</p>
+    </div>
 </div>
 
 </div>

@@ -49,11 +49,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                            <a class="nav-link text-dark dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
+                                <!-- <i class="fas fa-bell fa-fw"></i> -->
+                                <!-- <button type="button" class="btn btn-info"> -->
+                                    Daftar Peminjamanmu
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-success ml-2">3+</span>
+                                <!-- </button> -->
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -61,6 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <h6 class="dropdown-header">
                                     Daftar Peminjaman
                                 </h6>
+                                <!-- List Start -->
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <!-- Book Image -->
                                     <div class="mr-3">
@@ -77,6 +81,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     </div>
                                 </a>
                               
+                                <!-- Empty State -->
+                                <a class="dropdown-item d-flex flex-column align-items-center" href="#">
+                                    <img style="width:128px;" src="<?php echo base_url("assets/img/empty_cart.png"); ?>" />
+                                    <p>Tidak ada peminjaman</p>
+                                </a>
+
                                 <!--
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">

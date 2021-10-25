@@ -149,11 +149,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 
     <!-- Empty State -->
+    <?php if(!$buku):?>
     <div class="d-flex flex-column align-items-center" style="height:400px" href="#">
         <img style="width:256px;" src="<?php echo base_url("assets/img/empty_search.png"); ?>" />
         <h5>Oops, hasil tidak ditemukan:(</h5>
         <p class="text-center">Kami tidak dapat menemukan hasil pencarianmu. Mungkin kamu typo?</p>
     </div>
+    <?php endif;?>
 </div>
 
 </div>

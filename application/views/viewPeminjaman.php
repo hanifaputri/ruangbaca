@@ -22,12 +22,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <input type="text" name="q" class="form-control bg-white border-0 small" placeholder="Cari buku"
                     aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <select class="custom-select border-0" id="inputGroupSelect02">
-                        <option selected>Semua Kategori</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    
+                    <select name="c" class="custom-select border-0" id="inputGroupSelect02">
+                            <option value="all">Semua Kategori</option>
+                        <?php foreach($kategori as $k): ?>
+                            <option value="<?php echo $k->NAMA_KATEGORI ?>">
+                                <?php echo $k->NAMA_KATEGORI ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
+
                     <button class="btn btn-primary" type="submit">
                         <i class="fas fa-search fa-sm"></i>
                     </button>

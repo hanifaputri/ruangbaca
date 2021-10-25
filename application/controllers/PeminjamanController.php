@@ -39,6 +39,8 @@ class PeminjamanController extends CI_Controller {
 	public function index()
 	{
 		$data['buku'] = $this->buku->getBuku();
+		$data['kategori'] = $this->buku->getCategory();
+
 		// $this->cart->destroy();
 		// var_dump($this->cart->contents());
 
@@ -53,14 +55,22 @@ class PeminjamanController extends CI_Controller {
 	{
 		// Get url param
 		$keyword = trim($this->input->get('q'));
+		$category = $this->input->get('c');
+
 		$data['keyword'] = $keyword;
+		$data['category'] = $category;
 		
-		if ($keyword){
+		if ($keyword && $category=="all"){
 			$data['buku'] = $this->buku->searchByQuery($keyword);
+		} else if ($keyword){
+			$data['buku'] = $this->buku->searchByCategory($keyword, $category);
 		} else {
 			redirect('/home');
 		}
+
 		$data['title'] = "Hasil Pencarian";
+		$data['kategori'] = $this->buku->getCategory();
+
 		$this->load->view('header', $data);
 		$this->load->view('viewPeminjaman', $data);
 		$this->load->view('footer');

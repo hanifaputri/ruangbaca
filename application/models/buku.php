@@ -15,7 +15,8 @@ class Buku extends CI_Model {
         $this->table = 'BUKU';
     }
 
-    public function getBuku(){
+    public function getBuku()
+    {
         $query = $this->db->query("
         SELECT 
             BUKU.ID_BUKU, 
@@ -32,7 +33,8 @@ class Buku extends CI_Model {
         return $query->result();
     }
 
-    public function getBukuById($id){
+    public function getBukuById($id)
+    {
         $query = $this->db->query("
         SELECT 
             BUKU.ID_BUKU, 
@@ -56,7 +58,8 @@ class Buku extends CI_Model {
         return $query->result();
     }
 
-    public function getCartDetailById($id){
+    public function getCartDetailById($id)
+    {
         $query = $this->db->query("
         SELECT ID_BUKU, JUDUL_BUKU, URL_IMG_BUKU, PENULIS 
         FROM BUKU
@@ -66,13 +69,32 @@ class Buku extends CI_Model {
         return $query->row();
     }
 
-    public function searchByQuery($keyword){
+    public function searchByQuery($keyword)
+    {
         $query = $this->db->query("
         SELECT * FROM BUKU 
         INNER JOIN KATEGORI ON BUKU.ID_KATEGORI = KATEGORI.ID_KATEGORI
-        WHERE JUDUL_BUKU LIKE '%$keyword%';");
+        WHERE 
+        JUDUL_BUKU LIKE '%$keyword%';");
 
         return $query->result();
     }
 
+    public function searchByCategory($keyword, $category)
+    {
+        $query = $this->db->query("
+        SELECT * FROM BUKU 
+        INNER JOIN KATEGORI ON BUKU.ID_KATEGORI = KATEGORI.ID_KATEGORI
+        WHERE 
+        JUDUL_BUKU LIKE '%$keyword%' AND
+        NAMA_KATEGORI = '$category';");
+
+        return $query->result();
+    }
+
+    public function getCategory()
+    {
+        $query = $this->db->query("SELECT * FROM KATEGORI;");
+        return $query->result();
+    }
 }

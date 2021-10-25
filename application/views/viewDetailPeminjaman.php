@@ -32,6 +32,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </td>
                         </tr>
                         <tr>
+                            <td>Penulis</td>
+                            <td><?= $b->PENULIS?></td>
+                        </tr>
+                        <tr>
                             <td>Penerbit</td>
                             <td><?= $b->NAMA_PENERBIT?></td>
                         </tr>

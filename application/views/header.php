@@ -74,7 +74,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </div>
                                         <div class="mr-3 flex-grow-1">
                                             <h6 class="font-weight-bold"><?= $item['name'] ?></h6>
-                                            <div class="text-gray-500">ID= <?= $item['id'] ?></div>
+                                            <div class="text-gray-500"><?= $item['options']['penulis'] ?></div>
                                         </div>
                                         <div>
                                             <button class="btn btn-danger"

@@ -118,7 +118,8 @@ class PeminjamanController extends CI_Controller {
 			'price' => 0,
 			'name' => $book->JUDUL_BUKU,
 			'options' => array(
-				'imgUrl' => $book->URL_IMG_BUKU
+				'imgUrl' => $book->URL_IMG_BUKU,
+				'penulis' => $book->PENULIS
 			)
 		);
 

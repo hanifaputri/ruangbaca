@@ -103,7 +103,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <img style="height:240px; width:100%; object-fit: cover;" class="mb-4 img-thumbnail" src="<?= $b->URL_IMG_BUKU?>" />
                     <span class="badge badge-secondary mb-2"><?= $b->NAMA_KATEGORI?></span>
                     <h6 class="font-weight-bold text-gray-900"><?= $b->JUDUL_BUKU?></h6>
-                    <p class="m-0"><?php echo ($b->STATUS_BUKU=='Tersedia')? "<span>Tersedia</span>": "<span class='text-danger'>Tidak Tersedia</span>"; ?></p>
+                    <small class=" m-0">
+                        <i class="fas fa-user mr-2"></i>
+                        <?= $b->PENULIS?>
+                    </small>
+                    <!-- <p class="m-0"><?php echo ($b->STATUS_BUKU=='Tersedia')? "<span>Tersedia</span>": "<span class='text-danger'>Tidak Tersedia</span>"; ?></p> -->
                 </div>
                 <!-- <div class="card-footer row"> -->
                 <div class="card-footer btn-toolbar">

@@ -21,8 +21,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <?php foreach($buku as $b) : ?>
                 <div class="col-lg-4 text-center">
                     <img class="rounded img-thumbnail" style="width:100%" src="<?= $b->URL_IMG_BUKU?>"/>
-                   
-
                 </div>
                 <div class="col-lg-8">
                     <table class="table table-striped">
@@ -67,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <option>5</option>
                                     <option>6</option>
                                     <option>7</option>
-                                </select> <span>hari</span>
+                                </select><span>hari</span>
                             </div>
                         </div> 
                         <div class="form-row">

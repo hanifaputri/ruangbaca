@@ -132,4 +132,15 @@ class PeminjamanController extends CI_Controller {
 		$this->cart->destroy();
 		redirect('/home');
 	}
+
+	public function deleteCartById($id)
+	{
+		$data = array(
+            'rowid'   => $id,
+            'qty'     => 0
+        );
+
+        $this->cart->update($data);
+		redirect('/home');
+	}
 }

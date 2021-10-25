@@ -77,8 +77,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                             <div class="text-gray-500">ID= <?= $item['id'] ?></div>
                                         </div>
                                         <div>
-                                            <button class="btn btn-danger">
-                                            <i class="fas fa-trash"></i>
+                                            <button class="btn btn-danger"
+                                            onClick="window.location='<?= base_url('/peminjamanController/deleteCartById/'. $item['rowid']);?>'"
+                                            >
+                                                <i class="fas fa-trash"></i>
                                             </button>
                                         </div>
                                     </a>

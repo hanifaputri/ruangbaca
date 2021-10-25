@@ -39,7 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <!-- Logo -->
-                    <div class="d-none d-sm-inline-block">
+                    <div class="d-sm-inline-block">
                     <a href="<?= base_url() ?>">
                         <img class="img-fluid" style="height:32px;" src="<?php echo base_url() ?>assets/img/logo_horizontal.png" />
                     </a>

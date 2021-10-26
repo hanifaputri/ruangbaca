@@ -36,4 +36,12 @@ class Peminjaman extends CI_Model {
 
         return $this->db->affected_rows();
 	}
+
+    public function insertAllPeminjaman($data)
+    {
+		$this->db->insert_batch($this->table, $data);
+		// Produces: INSERT INTO mytable (title, name, date) VALUES ('My title', 'My name', 'My date'),  ('Another title', 'Another name', 'Another date')
+       
+        return $this->db->affected_rows();
+    }
 }

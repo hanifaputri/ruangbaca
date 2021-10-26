@@ -161,5 +161,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 <!-- End of Main Content -->
 
-   
+<!-- Toast Script -->
+<button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+<div id="liveToast" class="position-fixed p-3" style="z-index: 5; right: 50px; bottom: 0;">
+    <div style="opacity: 1!important;" class="toast bg-success align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+            Hello, world! This is a toast message.
+            </div>
+            <button type="button" class="mr-3 close text-light" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+    </div>
+</div>
+<script>
+    // var toastTrigger = document.getElementById('liveToastBtn');
+    // var toastLiveExample = document.getElementById('liveToast');
     
+    // if (toastTrigger) {
+    //     toastTrigger.addEventListener('click', function () {
+    //         var toast = new bootstrap.Toast(toastLiveExample);
+
+    //         toast.show();
+    //     });
+    // }
+    // window.onload = function() {
+    //     var toast = new bootstrap.Toast(document.getElementById('liveToast'));
+    //     toast.show();
+    // };
+</script>
+<script>
+$(document).ready(function(){
+    alert("Your book is overdue.");
+  
+    $('#liveToastBtn').click(function(){
+        
+        // $('#liveToast').toast('show');
+    });
+});
+</script>

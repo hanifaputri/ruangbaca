@@ -120,9 +120,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </a>
                                 -->
                                 <a style="cursor:pointer;" class="dropdown-item text-center small text-gray-500"
-                                onClick="window.location='<?= base_url('/peminjamanController/resetCart');?>'">
+                                onClick="window.location='<?= base_url('/peminjamancontroller/viewdetailpeminjaman');?>'">
                                     Lihat Semua Peminjaman
                                 </a>
+                               <!-- /peminjamanController/resetCart -->
                             </div>
                         </li>
 

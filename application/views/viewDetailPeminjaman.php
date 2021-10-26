@@ -1,8 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+<!-- Header -->
+<?php include 'header.php';?>
+
 <!-- Begin Page Content -->
-<div class="container-fluid mt-8 p-4">
+<div class="container-fluid mt-4 p-4">
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-center mb-4">
@@ -10,103 +13,92 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
 
     <!-- Content -->
-    <div class="col-md-8 mb-4 mx-auto">
+    <div class="col-md-10 mb-4 mx-auto">
         <div class="card mb-4">
-            <div class="card-header justify-content-center font-weight-bold">
+            <!-- <div class="card-header justify-content-center font-weight-bold">
                 Detail Buku
-            </div>
+            </div> -->
 
-            <form method="post" action="<?= base_url('peminjamanController/addToPeminjaman')?>">
-            <div class="row card-body">
-                <?php foreach($buku as $b) : ?>
-                <div class="col-lg-4 text-center">
-                    <img class="rounded img-thumbnail" style="width:100%" src="<?= $b->URL_IMG_BUKU?>"/>
+            <div class="card-body">
+                <form method="post" name="peminjaman" action="<?= base_url('/peminjamancontroller/addDataPeminjaman');?>">
+                <!-- List Start -->
+                    <div class="table-responsive-sm">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Nama Buku</th>
+                                    <th scope="col">Durasi Peminjaman</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            <?php $i = 0; ?>
+                            <?php foreach ($this->cart->contents() as $item): ?>
+                                <tr>
+                                    <td class="align-middle"><?=($i+1).'.'?></td>
+                                    <td class="align-middle">
+                                        <input type="hidden" name="idUser[]" value="<?= $this->session->userdata('id')?>" />
+                                        <input type="hidden" name="idBuku[]" value="<?= $item['id']?>" />
+                                        <div class="d-sm-flex align-items-center">
+                                        <!-- Book Image -->
+                                        <div class="mr-3">
+                                            <img class="bg-gray-100 rounded border p-1 " style="width:72px;" src="<?= $item['options']['imgUrl'] ?>"/>
+                                        </div>
+                                        <div class="mr-3 flex-grow-1">
+                                            <h6 class="font-weight-bold"><?= $item['name'] ?></h6>
+                                            <div class="text-gray-500"><?= $item['options']['penulis'] ?></div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="d-sm-flex align-items-center mb-2">
+                                            <select name="durasi[]" id="inputDurasi" class="form-control d-inline mr-2" style="max-width:75px;">
+                                                <option selected>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                            </select><span>hari</span>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a class="btn btn-danger" href="<?= base_url('/peminjamanController/deleteCartById/'. $item['rowid']);?>">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php $i++; ?>
+                                <?php endforeach; ?>
+                                <tr>
+                                    <td class="text-right" colspan="2">
+                                        Total Peminjaman
+                                    </td>
+                                    <td colspan="2">
+                                        <?= ($i)?> buku
+                                    </td>
+                                </tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                <!-- List End -->
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox mr-sm-2">
+                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                        <label class="custom-control-label" for="customControlAutosizing">
+                            Saya menyetujui syarat dan ketentuan yang berlaku
+                        </label>
+                    </div>
                 </div>
-                <div class="col-lg-8">
-                    <table class="table table-striped">
-                        <tr>
-                            <td>Judul Buku</td>
-                            <td>
-                                <input id="idBuku" name="idBuku" type="hidden" value="<?= $b->ID_BUKU?>"/>
-                                <?= $b->JUDUL_BUKU?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Penulis</td>
-                            <td><?= $b->PENULIS?></td>
-                        </tr>
-                        <tr>
-                            <td>Penerbit</td>
-                            <td><?= $b->NAMA_PENERBIT?></td>
-                        </tr>
-                        <tr>
-                            <td>Kategori</td>
-                            <td><?= $b->NAMA_KATEGORI?></td>
-                        </tr>
-                        <tr>
-                            <td>Bahasa</td>
-                            <td><?= $b->NAMA_BAHASA?></td>
-                        </tr>
-                        <tr>
-                            <td>ISBN</td>
-                            <td>
-                                <input id="isbn" type="hidden" value="<?= $b->ISBN?>"/>
-                                <svg id="barcode" jsbarcode-value="<?= $b->ISBN?>"></svg>
-                            </td>
-                        </tr>
-                    </table>
-
-                        <div class="form-row mb-2">
-                            <label for="inputDurasi" class="col-sm-8 col-form-label">
-                                Masukkan durasi peminjaman
-                            </label>
-                            <div class="col-sm-4">
-                                <select name="durasi" id="inputDurasi" class="form-control d-inline mr-2" style="width:100px;">
-                                    <option selected>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                </select><span>hari</span>
-                            </div>
-                        </div> 
-                        <div class="form-row">
-                        <button data-toggle="modal" data-target="#submitModal" type="button" class="btn btn-block btn-primary">Pinjam Buku</button>
-
-                        </div>
-
-                        <!-- Peminjaman Modal-->
-                        <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Peminjaman</h5>
-                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Apakah kamu yakin ingin melakukan peminjaman?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
-                                        <button class="btn btn-primary" type="submit">Ya</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <?php endforeach; ?>
+                <button type="submit" name="peminjaman" class="btn btn-block btn-primary">Pinjam Buku</button>
+                </form>
             </div>
-            </form>
         </div>
     </div>
                         
-
-</div>
         
 </div>
 <!-- End of Main Content -->
@@ -130,5 +122,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     };
     </script>
             
-
-            
+    
+<!-- Header -->
+<?php include 'footer.php';?>

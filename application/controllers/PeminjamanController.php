@@ -76,7 +76,7 @@ class PeminjamanController extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	public function viewDetailPeminjaman($id)
+	public function viewDetailBuku($id)
 	{
 		$book = $this->buku->getBukuById($id);
 		if ($book) {
@@ -85,7 +85,7 @@ class PeminjamanController extends CI_Controller {
 			$data['title'] = "Detail Peminjaman Buku";
 
 			$this->load->view('header', $data);
-			$this->load->view('viewDetailPeminjaman', $data);
+			$this->load->view('viewDetailBuku', $data);
 			$this->load->view('footer');
 			
 		} else {
@@ -153,5 +153,39 @@ class PeminjamanController extends CI_Controller {
 
         $this->cart->update($data);
 		redirect('/home');
+	}
+
+	public function viewDetailPeminjaman()
+	{	
+		$this->load->view('viewDetailPeminjaman');
+		// $data = $this->cart->contents();
+		// $data = $this->session->userdata('id');
+		// print_r($data);
+	}
+
+	public function addDataPeminjaman()
+	{
+		// $data = $this->input->post();
+		// var_dump($data);
+		$data = array();
+		$post = $this->input->post();
+		
+		foreach ($post['idUser'] as $key => $value) {
+			if(isset($post['idUser'][$key])){
+				array_push($data, array(
+					'ID_USER'			=> $post['idUser'][$key],
+					'ID_BUKU'			=> $post['idBuku'][$key],
+					'DURASI_PEMINJAMAN'	=> $post['durasi'][$key]
+				));
+			}
+		}
+		// var_dump($data);
+		$status = $this->peminjaman->insertAllPeminjaman($data);
+		if ($status){
+			$this->cart->destroy();
+			redirect('/peminjaman/success');
+		} else {
+			echo "Gagal";
+		}
 	}
 }

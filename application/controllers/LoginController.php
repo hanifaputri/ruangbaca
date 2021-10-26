@@ -24,6 +24,7 @@ class LoginController extends CI_Controller {
             } else {
                 // Add session
                 $user_data = array(
+                    'id'        => $data->ID_USER,
                     'nama'  	=> $data->NAMA_USER,
                     'logged_in' => TRUE
                 );

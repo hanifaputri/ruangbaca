@@ -170,7 +170,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div data-delay="2000" id="liveToast" class="toast hide bg-success align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
-            Hello, world! This is a toast message.
+                Buku berhasil ditambahkan ke peminjaman
             </div>
             <button type="button" class="mr-3 close text-light" data-dismiss="toast" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -192,7 +192,7 @@ $(document).ready(function(){
     // Add to Cart 
     $('.btn-pinjam').click(function(){
         let id = $(this).parents('.book-item').find('.id-buku').val();
-        console.log(id);
+        // console.log(id);
 
         $.ajax({
             url : "<?= base_url('/peminjamancontroller/addcart')?>",
@@ -201,13 +201,14 @@ $(document).ready(function(){
             dataType:'json',
             success:function(res) {
                 $('.badge-total-item').html(res.total_item);
+                // location.reload();
                 $('#liveToast').toast('show');
-                // location.reload(true);
+
                 console.log("Data sent success.");
                 console.log(res);
             },
             error: function() {
-                console.log('There was some error performing the AJAX call!');
+                console.log('Error');
             }
         });
     });

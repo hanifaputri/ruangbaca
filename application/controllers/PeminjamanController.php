@@ -37,7 +37,23 @@ class PeminjamanController extends CI_Controller {
     }
 
 	public function index()
-	{
+	{	
+		// $id = 2;
+		// $data = $this->cart->contents();
+
+		// foreach ($data as $item){
+		// 	if ($item['id']==$id){
+		// 		echo "Yes ketemu!";
+		// 		break;
+		// 	} else {
+		// 		echo "Ga ketemu";
+		// 	}
+		// }
+		// // foreach ($post['idUser'] as $key => $value) {
+
+		// // var_dump($data);
+		// die();
+		
 		$data['buku'] = $this->buku->getBuku();
 		$data['kategori'] = $this->buku->getCategory();
 

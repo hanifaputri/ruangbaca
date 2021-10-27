@@ -101,12 +101,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- Content Row -->
     <div class="row mt-4">
-        <!-- Book -->
+        <!-- Book List-->
         <?php foreach($buku as $b) : ?>
         <div class="col-xl-2 col-md-3 col-sm-4 mb-4">
             <div class="card book-item shadow h-100">
                 <div class="card-body p-3">
                     <input class="id-buku" type="hidden" value="<?= $b->ID_BUKU?>"/>
+
                     <img style="height:240px; width:100%; object-fit: cover;" class="mb-4 img-thumbnail" src="<?= $b->URL_IMG_BUKU?>" />
                     <span class="badge badge-secondary mb-2"><?= $b->NAMA_KATEGORI?></span>
                     
@@ -127,28 +128,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <!-- <p class="m-0"></p> -->
                 </div>
                 <!-- <div class="card-footer row"> -->
-                <div class="card-footer btn-toolbar">
+                <div class="card-footer">
+                    <div class="btn-toolbar d-flex flex-row">
                     <!-- <div class="col-xs-4 p-0"> -->
-                    <div class="btn-group">
                         <!-- Button Lihat -->
                         <a href="<?= base_url('/peminjaman/' . $b->ID_BUKU);?>">
-                            <button type="button" class="btn btn-secondary" <?php echo ($b->STATUS_BUKU=='Tersedia')? '' : 'disabled';?> >
+                            <button type="button" class="btn btn-block btn-secondary" <?php echo ($b->STATUS_BUKU=='Tersedia')? '' : 'disabled';?> >
                                 <i class="fas fa-eye"></i>
                             </button>
                         </a>
-                    </div>
                     <!-- <div class="col-xs-8 p-0"> -->
-                    <div class="btn-group ml-2">
                         <!-- Button Pinjam -->
-                        <a class="btn-pinjam btn btn-block btn-primary">
-                            <i class="fas fa-plus mr-2"></i>
-                            Pinjam
-                        </a>
+                        <?php
+                        $isOnCart = false;
+                        if ($this->cart->total_items()!== 0){
+                            foreach ($this->cart->contents() as $item){
+                                if ($item['id']== $b->ID_BUKU){
+                                    $isOnCart = true;
+                                } 
+                            }
+                        } 
+                        if ($isOnCart == true) {
+                            echo "
+                            <input class='id-buku' type='hidden' value='<?= $b->ID_BUKU?>'/>
+                            ";
+                            echo "
+                            <a class='btn btn-cart-delete btn-danger ml-2 flex-fill'>
+                                <i class='fas fa-trash mr-2'></i>Hapus
+                            </a>";
+                        } else {
+                            echo "
+                            <a class='btn btn-pinjam btn-primary ml-2 flex-fill'>
+                                <i class='fas fa-plus mr-2'></i>Pinjam
+                            </a>";
+                        }
+                        ?>
+                        
                     </div>
                 </div>
             </div>
         </div>
         <?php endforeach; ?>
+        <!-- End Book List --.
     </div>
 
     <!-- Empty State -->

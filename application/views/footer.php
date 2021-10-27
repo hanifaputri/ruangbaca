@@ -54,6 +54,7 @@ $(document).ready(function(){
             dataType:'json',
             success:function(res) {
                 $('.badge-total-item').html(res.total_item);
+                $('#dropdown-cart').dropdown();
                 // location.reload();
                 $('#liveToast').toast('show');
 

@@ -27,6 +27,64 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
     <script src="<?php echo base_url() ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+<!-- jQuery -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#liveToastBtn').click(function(){
+        // var text_val = $('#first').find('#second_child').html();
+        console.log('Masuk');
+    });
+
+    // Add to Cart 
+    $('.btn-pinjam').click(function(){
+        let id = $(this).parents('.book-item').find('.id-buku').val();
+        // console.log(id);
+
+        $.ajax({
+            url : "<?= base_url('/cartController/add')?>",
+            data:{id : id},
+            method:'POST',
+            success:function(data) {
+                let totalData = parseInt(<?= $this->cart->total_items();?>);
+                // $('.badge-total-item').html(totalData);
+                // $('.cart-content').html(data);
+                // $('.dropdown-toggle').dropdown();
+                location.reload();
+                // $('#liveToast').toast('show');
+
+                console.log(totalData);
+                console.log("Data successfully added.");
+            },
+            error: function() {
+                console.log('Error');
+            }
+        });
+    });
+
+    $('.btn-cart-delete').click(function(){
+        let id = $('.cart-id').val();
+        // let id = $(this).parents('.cart-item').find('.cart-id').val();
+
+        // console.log(id);
+        $.ajax({
+            url : "<?= base_url('/cartController/remove')?>",
+            data:{id : id},
+            method:'POST',
+            success:function(data) {
+                // $('.cart-content').html(data);
+                // $('.dropdown-toggle').dropdown();
+                location.reload();
+                // console.log($('.cart-content').html());
+                console.log("Item = <?= $this->cart->total_items(); ?>");
+                console.log("Cart has been deleted.");
+            },
+            error: function() {s
+                console.log('Error');
+            }
+        });
+    });
+});
+</script>
 </head>
 
 <body id="page-top">
@@ -59,11 +117,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <!-- <button type="button" class="btn btn-info"> -->
                                     Daftar Peminjamanmu
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-total-item badge-success ml-2"><?= sizeOf($this->cart->contents()) ?></span>
+                                <span class="badge badge-total-item badge-success ml-2"><?=$this->cart->total_items() ?></span>
                                 <!-- </button> -->
                             </a>
                             <!-- Dropdown - Alerts -->
-                            <div id="dropdown-cart" class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
                                     Daftar Peminjaman

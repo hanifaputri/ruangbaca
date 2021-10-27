@@ -33,68 +33,7 @@
         </div>
     </div>
    
-    <!-- jQuery -->
-<script type="text/javascript">
-
-$(document).ready(function(){
-    $('#liveToastBtn').click(function(){
-        // var text_val = $('#first').find('#second_child').html();
-        console.log('Masuk');
-    });
-
-    // Add to Cart 
-    $('.btn-pinjam').click(function(){
-        let id = $(this).parents('.book-item').find('.id-buku').val();
-        // console.log(id);
-
-        $.ajax({
-            url : "<?= base_url('/cartController/add')?>",
-            data:{id : id},
-            method:'GET',
-            dataType:'json',
-            success:function(res) {
-                $('.badge-total-item').html(res.total_item);
-                $('#dropdown-cart').dropdown();
-                // location.reload();
-                $('#liveToast').toast('show');
-
-                console.log("Data sent success.");
-                console.log(res);
-            },
-            error: function() {
-                console.log('Error');
-            }
-        });
-    });
-
-    $('.btn-cart-delete').click(function(){
-        let id = $(this).parents('.cart-item').find('.cart-id').val();
-
-        // console.log(id);
-        $.ajax({
-            url : "<?= base_url('/cartController/remove')?>",
-            data:{id : id},
-            method:'POST',
-            success:function(data) {
-                // let currVal = parseInt($('.badge-total-item').text());
-                // badge.html(currVal-1);
-                // $('.badge-total-item').html(res.total_item);
-                // location.reload();
-                // $('#liveToast').toast('show');
-                $('.cart-content').html(data);
-                $('#dropdown-cart').dropdown();
-
-                // console.log($('.cart-content').html());
-                console.log("Item = <?= $this->cart->total_items(); ?>");
-                console.log("Cart has been deleted.");
-            },
-            error: function() {
-                console.log('Error');
-            }
-        });
-    });
-});
-</script>
+  
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">

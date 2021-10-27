@@ -40,6 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <td class="align-middle"><?=($i+1).'.'?></td>
                                     <td class="align-middle">
                                         <input type="hidden" name="idUser[]" value="<?= $this->session->userdata('id')?>" />
+                                        <input type="hidden" class="cart-id" name="idRow[]" value="<?= $item['rowid']?>" />
                                         <input type="hidden" name="idBuku[]" value="<?= $item['id']?>" />
                                         <div class="d-sm-flex align-items-center">
                                         <!-- Book Image -->
@@ -65,7 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </div>
                                     </td>
                                     <td class="align-middle">
-                                        <a class="btn btn-danger" href="<?= base_url('/peminjamanController/deleteCartById/'. $item['rowid']);?>">
+                                        <a class="btn btn-cart-delete btn-danger">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </td>
@@ -104,26 +105,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         
 </div>
 <!-- End of Main Content -->
-
-<!-- Start Barcode Script -->
-<script src="<?php echo base_url('assets/js/JsBarcode.code128.min.js')?>"></script>
-<script>
-    let value = document.getElementById("isbn").value;
-    let id = "#barcode";
-
-    function initBarcode(value){
-        JsBarcode(id, value, {
-            width: 1.5,
-            height: '30px',
-            fontSize: '12px',
-            displayValue: true
-        });
-    }
-    window.onload = function() {
-        initBarcode(value);
-    };
-    </script>
-
 
 <!-- Footer -->
 <?php include 'footer.php';?>

@@ -28,14 +28,14 @@ class CartController extends CI_Controller {
     }
     public function view()
     {
-        echo "Test";
+        return $this->load->view('cart', '', TRUE);
     }
     
 
     public function add()
 	{
 		// Retrieve id from cart
-		$id = $this->input->get('id');
+		$id = $this->input->post('id');
 		$book = $this->buku->getCartDetailById($id);
 		$data = array(
 			'id' => $book->ID_BUKU,
@@ -50,11 +50,11 @@ class CartController extends CI_Controller {
 		// Add item to cart
 		$this->cart->insert($data);
 
-		// Add total item
-		$data['total_item'] = $this->cart->total_items();
+		// // Add total item
+		// $data['total_item'] = $this->cart->total_items();
 		
 		// Return value to view asynchronously
-		echo json_encode($data);
+		echo $this->view();
 		exit();
 	}
 
@@ -66,14 +66,14 @@ class CartController extends CI_Controller {
             'qty'     => 0
         );
         
-        $view = $this->load->view('cart', '', TRUE);
         // var_dump($data);
 
         // Update cart
         $this->cart->update($data);
 
         // Return cart content
-        echo $view;
+        echo $this->view();
+        exit();
 	}
 
 	public function deleteById($id)
@@ -84,7 +84,7 @@ class CartController extends CI_Controller {
         );
 
         $this->cart->update($data);
-		redirect('/home');
+		exit();
 	}
 
 	public function reset()

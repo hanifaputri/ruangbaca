@@ -13,14 +13,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
 
     <!-- Content -->
-    <div class="col-md-10 mb-4 mx-auto">
+    <div class="col-md-8 mb-4 mx-auto">
         <div class="card mb-4">
             <!-- <div class="card-header justify-content-center font-weight-bold">
                 Detail Buku
             </div> -->
 
+            <form method="post" name="peminjaman" action="<?= base_url('/peminjamancontroller/addDataPeminjaman');?>">
             <div class="card-body">
-                <form method="post" name="peminjaman" action="<?= base_url('/peminjamancontroller/addDataPeminjaman');?>">
                 <!-- List Start -->
                     <div class="table-responsive-sm">
                         <table class="table">
@@ -85,6 +85,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </table>
                     </div>
                 <!-- List End -->
+            </div>
+            <div class="card-footer">
                 <div class="form-group">
                     <div class="custom-control custom-checkbox mr-sm-2">
                         <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
@@ -94,8 +96,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>
                 <button type="submit" name="peminjaman" class="btn btn-block btn-primary">Pinjam Buku</button>
-                </form>
             </div>
+            </form>
         </div>
     </div>
                         

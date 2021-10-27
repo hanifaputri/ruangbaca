@@ -22,6 +22,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url() ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </head>
 
@@ -55,7 +59,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <!-- <button type="button" class="btn btn-info"> -->
                                     Daftar Peminjamanmu
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-success ml-2"><?= sizeOf($this->cart->contents()) ?></span>
+                                <span class="badge badge-total-item badge-success ml-2"><?= sizeOf($this->cart->contents()) ?></span>
                                 <!-- </button> -->
                             </a>
                             <!-- Dropdown - Alerts -->

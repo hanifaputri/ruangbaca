@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+
+
+
 <style>
     .jumbotron-top {
         background: #FC466B; 
@@ -101,8 +104,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- Book -->
         <?php foreach($buku as $b) : ?>
         <div class="col-xl-2 col-md-3 col-sm-4 mb-4">
-            <div class="card shadow h-100">
+            <div class="card book-item shadow h-100">
                 <div class="card-body p-3">
+                    <input class="id-buku" type="hidden" value="<?= $b->ID_BUKU?>"/>
                     <img style="height:240px; width:100%; object-fit: cover;" class="mb-4 img-thumbnail" src="<?= $b->URL_IMG_BUKU?>" />
                     <span class="badge badge-secondary mb-2"><?= $b->NAMA_KATEGORI?></span>
                     
@@ -136,8 +140,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <!-- <div class="col-xs-8 p-0"> -->
                     <div class="btn-group ml-2">
                         <!-- Button Pinjam -->
-                        <a class="btn btn-block btn-primary" 
-                        onClick="window.location='<?= base_url('/peminjamanController/addToCart/'. $b->ID_BUKU)?>'">
+                        <a class="btn-pinjam btn btn-block btn-primary">
                             <i class="fas fa-plus mr-2"></i>
                             Pinjam
                         </a>
@@ -163,9 +166,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <!-- Toast Script -->
 <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
-
-<div id="liveToast" class="position-fixed p-3" style="z-index: 5; right: 50px; bottom: 0;">
-    <div style="opacity: 1!important;" class="toast bg-success align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="position-fixed p-3" style="z-index: 5; right: 50px; bottom: 0;">
+    <div data-delay="2000" id="liveToast" class="toast hide bg-success align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">
             Hello, world! This is a toast message.
@@ -176,29 +178,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          </div>
     </div>
 </div>
-<script>
-    // var toastTrigger = document.getElementById('liveToastBtn');
-    // var toastLiveExample = document.getElementById('liveToast');
-    
-    // if (toastTrigger) {
-    //     toastTrigger.addEventListener('click', function () {
-    //         var toast = new bootstrap.Toast(toastLiveExample);
 
-    //         toast.show();
-    //     });
-    // }
-    // window.onload = function() {
-    //     var toast = new bootstrap.Toast(document.getElementById('liveToast'));
-    //     toast.show();
-    // };
-</script>
-<script>
+<!-- jQuery -->
+<script type="text/javascript">
+
 $(document).ready(function(){
-    alert("Your book is overdue.");
-  
     $('#liveToastBtn').click(function(){
-        
-        // $('#liveToast').toast('show');
+        // var text_val = $('#first').find('#second_child').html();
+
+        console.log('Masuk');
+    });
+
+    // Add to Cart 
+    $('.btn-pinjam').click(function(){
+        let id = $(this).parents('.book-item').find('.id-buku').val();
+        console.log(id);
+
+        $.ajax({
+            url : "<?= base_url('/peminjamancontroller/addcart')?>",
+            data:{id : id},
+            method:'GET',
+            dataType:'json',
+            success:function(res) {
+                $('.badge-total-item').html(res.total_item);
+                $('#liveToast').toast('show');
+                // location.reload(true);
+                console.log("Data sent success.");
+                console.log(res);
+            },
+            error: function() {
+                console.log('There was some error performing the AJAX call!');
+            }
+        });
     });
 });
 </script>
+
+<!-- Footer -->
+<?php include 'footer.php';?>
+

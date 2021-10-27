@@ -63,66 +63,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <!-- </button> -->
                             </a>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div id="dropdown-cart" class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
                                     Daftar Peminjaman
                                 </h6>
-                                <!-- List Start -->
-                                <?php $i = 0; ?>
-                                <?php foreach ($this->cart->contents() as $item): ?>
-                                    <a class="dropdown-item d-flex align-items-center">
-                                        <!-- Book Image -->
-                                        <div class="mr-3">
-                                            <img class="bg-gray-100 rounded border p-1 " style="width:72px;" src="<?= $item['options']['imgUrl'] ?>"/>
-                                        </div>
-                                        <div class="mr-3 flex-grow-1">
-                                            <h6 class="font-weight-bold"><?= $item['name'] ?></h6>
-                                            <div class="text-gray-500"><?= $item['options']['penulis'] ?></div>
-                                        </div>
-                                        <div>
-                                            <button class="btn btn-danger"
-                                            onClick="window.location='<?= base_url('/peminjamanController/deleteCartById/'. $item['rowid']);?>'"
-                                            >
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </a>
-                                <?php $i++; ?>
-                                <?php endforeach; ?>
-                                
-                                <?php if ($i==0):?>
-                                    <!-- Empty State -->
-                                    <div class="d-flex flex-column align-items-center" href="#">
-                                        <img style="width:128px;" src="<?php echo base_url("assets/img/empty_cart.png"); ?>" />
-                                        <p>Tidak ada peminjaman</p>
-                                    </div>
-                                <?php endif; ?>
+                                <div class="cart-content">
+                                    <?php include 'cart.php'; ?>
+                                </div>
 
-                                <!--
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                -->
                                 <a style="cursor:pointer;" class="dropdown-item text-center small text-gray-500"
                                 onClick="window.location='<?= base_url('/peminjamancontroller/viewdetailpeminjaman');?>'">
                                     Lihat Semua Peminjaman

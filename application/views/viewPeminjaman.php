@@ -179,42 +179,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 </div>
 
-<!-- jQuery -->
-<script type="text/javascript">
-
-$(document).ready(function(){
-    $('#liveToastBtn').click(function(){
-        // var text_val = $('#first').find('#second_child').html();
-
-        console.log('Masuk');
-    });
-
-    // Add to Cart 
-    $('.btn-pinjam').click(function(){
-        let id = $(this).parents('.book-item').find('.id-buku').val();
-        // console.log(id);
-
-        $.ajax({
-            url : "<?= base_url('/peminjamancontroller/addcart')?>",
-            data:{id : id},
-            method:'GET',
-            dataType:'json',
-            success:function(res) {
-                $('.badge-total-item').html(res.total_item);
-                // location.reload();
-                $('#liveToast').toast('show');
-
-                console.log("Data sent success.");
-                console.log(res);
-            },
-            error: function() {
-                console.log('Error');
-            }
-        });
-    });
-});
-</script>
-
 <!-- Footer -->
 <?php include 'footer.php';?>
 

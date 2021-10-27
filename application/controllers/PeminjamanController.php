@@ -117,26 +117,26 @@ class PeminjamanController extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	public function addToCart($id)
-	{
-		$book = $this->buku->getCartDetailById($id);
-		$data = array(
-			'id' => $book->ID_BUKU,
-			'qty' => 1,
-			'price' => 0,
-			'name' => $book->JUDUL_BUKU,
-			'options' => array(
-				'imgUrl' => $book->URL_IMG_BUKU,
-				'penulis' => $book->PENULIS
-			)
-		);
+	// public function addToCart($id)
+	// {
+	// 	$book = $this->buku->getCartDetailById($id);
+	// 	$data = array(
+	// 		'id' => $book->ID_BUKU,
+	// 		'qty' => 1,
+	// 		'price' => 0,
+	// 		'name' => $book->JUDUL_BUKU,
+	// 		'options' => array(
+	// 			'imgUrl' => $book->URL_IMG_BUKU,
+	// 			'penulis' => $book->PENULIS
+	// 		)
+	// 	);
 
-		$this->cart->insert($data);
-		redirect('/home');
-		// var_dump($data);
-	}
+	// 	$this->cart->insert($data);
+	// 	redirect('/home');
+	// 	// var_dump($data);
+	// }
 
-	public function addCart()
+	public function add()
 	{
 		// Retrieve id from cart
 		$id = $this->input->get('id');

@@ -18,39 +18,24 @@ class PengembalianController extends CI_Controller {
         // Load Model
         $this->load->model('peminjaman');
     }
-    
-    /*
-    public function getPeminjamanById($id)
-    {
-        $query = $this->db->query("
-        SELECT ID_PEMINJAMAN, ID_BUKU, ID_USER, TGL_PINJAM, DURASI_PEMINJAMAN, TGL_KEMBALI
-        FROM PEMINJAMAN
-        WHERE ID_PEMINJAMAN = '$id';
-        ");
-
-        return $query->row();
-    }
-    */
 
     public function index()
     {
+        $idUser = $this->session->userdata('id');
+        $data['pengembalian'] = $this->peminjaman->getAllPeminjaman($idUser);
         
+        $data['title'] = "Detail Pengembalian Buku";
+        $this->load->view('viewPengembalian', $data);
     }
 
-    public function searchId($id)
+    public function returnBuku($id)
     {
-        $idPeminjaman = $this->peminjaman->getPeminjamanById($id);
-        if (!$idPeminjaman){
-            echo "ID Peminjaman tidak ditemukan";
-        } else {
-            $data['peminjaman'] = 
-            
-            $this->load->view('viewPengembalian', $data);
-        }
-    }
+        $data = array(
+            'rowid' => $id,
+            'qty'   => 0
+        );
 
-    public function returnBuku()
-    {
-        
+        $this->cart->update($data);
+        redirect('/pengembalian');
     }
 }

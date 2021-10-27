@@ -44,4 +44,15 @@ class Peminjaman extends CI_Model {
        
         return $this->db->affected_rows();
     }
+
+    public function getAllPeminjaman($idUser)
+    {
+        $query = $this->db->query("
+        SELECT * FROM PEMINJAMAN
+        INNER JOIN BUKU ON PEMINJAMAN.ID_BUKU = BUKU.ID_BUKU
+        WHERE ID_USER = '$idUser'
+        ");
+
+        return $query->result();
+    }
 }

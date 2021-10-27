@@ -123,7 +123,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         initBarcode(value);
     };
     </script>
-            
-    
-<!-- Header -->
+
+
+<!-- Footer -->
 <?php include 'footer.php';?>

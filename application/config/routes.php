@@ -56,8 +56,10 @@ $route['translate_uri_dashes'] = FALSE;
 $route['home'] = 'peminjamanController';
 $route['home/search'] = 'peminjamanController/search';
 
-$route['peminjaman/(:num)'] = 'peminjamanController/viewDetailBuku/$1';
+$route['buku/(:num)'] = 'peminjamanController/viewDetailBuku/$1';
+$route['peminjaman/detail'] = 'peminjamanController/viewDetailPeminjaman';
 $route['peminjaman/success'] = 'peminjamanController/peminjamanBerhasil';
+
 $route['register'] = 'PendaftaranController';
 $route['login'] = 'LoginController';
 $route['logout'] = 'LoginController/logout';

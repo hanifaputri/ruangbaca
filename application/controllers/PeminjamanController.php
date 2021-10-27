@@ -48,7 +48,6 @@ class PeminjamanController extends CI_Controller {
 		$data['title'] = "Eksplor Buku";
 		$this->load->view('header', $data);
 		$this->load->view('viewPeminjaman', $data);
-		$this->load->view('footer');
 	}
 
 	public function search()
@@ -73,7 +72,6 @@ class PeminjamanController extends CI_Controller {
 
 		$this->load->view('header', $data);
 		$this->load->view('viewPeminjaman', $data);
-		$this->load->view('footer');
 	}
 
 	public function viewDetailBuku($id)
@@ -136,6 +134,32 @@ class PeminjamanController extends CI_Controller {
 		$this->cart->insert($data);
 		redirect('/home');
 		// var_dump($data);
+	}
+
+	public function addCart()
+	{
+		// Retrieve id from cart
+		$id = $this->input->get('id');
+		$book = $this->buku->getCartDetailById($id);
+		$data = array(
+			'id' => $book->ID_BUKU,
+			'qty' => 1,
+			'price' => 0,
+			'name' => $book->JUDUL_BUKU,
+			'options' => array(
+				'imgUrl' => $book->URL_IMG_BUKU,
+				'penulis' => $book->PENULIS
+			)
+		);
+		// Add item to cart
+		$this->cart->insert($data);
+
+		// Add total item
+		$data['total_item'] = $this->cart->total_items();
+		
+		// Return value to view asynchronously
+		echo json_encode($data);
+		exit();
 	}
 
 	public function resetCart()

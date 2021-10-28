@@ -1,36 +1,35 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+<!-- Header -->
+<?php include 'header.php';?>
+
 <!-- Begin Page Content -->
-<div class="container-fluid mt-8 p-4">
-
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-center mb-4">
-        <h1 class="h2 mb-4 text-dark">Detail Peminjaman</h1>
-        </div>
-
+<div class="container-fluid mt-4 p-4">
     <!-- Content -->
     <div class="col-md-8 mb-4 mx-auto">
         <div class="card mb-4">
-            <div class="card-header justify-content-center font-weight-bold">
-                Detail Buku
-            </div>
-
             <form method="post" action="<?= base_url('peminjamanController/addToPeminjaman')?>">
-            <div class="row card-body">
+            <div class="row card-body book-item">
                 <?php foreach($buku as $b) : ?>
+                <input class="id-buku" type="hidden" value="<?= $b->ID_BUKU?>"/>
+
+                <div class="col-lg-12 mb-3">
+                    <h3><?= $b->JUDUL_BUKU?></h3>
+                    <!-- Availability -->
+                    <?php 
+                        if ($b->STATUS_BUKU=='Tersedia') {
+                            echo "<span class='badge mb-2 badge-success'>Tersedia</span>";
+                        } else {
+                            echo "<span class='badge mb-2 badge-danger'>Sedang Dipinjam</span>";
+                        }
+                    ?>
+                </div>
                 <div class="col-lg-4 text-center">
                     <img class="rounded img-thumbnail" style="width:100%" src="<?= $b->URL_IMG_BUKU?>"/>
                 </div>
                 <div class="col-lg-8">
                     <table class="table table-striped">
-                        <tr>
-                            <td>Judul Buku</td>
-                            <td>
-                                <input id="idBuku" name="idBuku" type="hidden" value="<?= $b->ID_BUKU?>"/>
-                                <?= $b->JUDUL_BUKU?>
-                            </td>
-                        </tr>
                         <tr>
                             <td>Penulis</td>
                             <td><?= $b->PENULIS?></td>
@@ -56,60 +55,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </tr>
                     </table>
 
-                        <div class="form-row mb-2">
-                            <label for="inputDurasi" class="col-sm-8 col-form-label">
-                                Masukkan durasi peminjaman
-                            </label>
-                            <div class="col-sm-4">
-                                <select name="durasi" id="inputDurasi" class="form-control d-inline mr-2" style="width:100px;">
-                                    <option selected>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                </select><span>hari</span>
-                            </div>
-                        </div> 
-                        <div class="form-row">
-                        <button data-toggle="modal" data-target="#submitModal" type="button" class="btn btn-block btn-primary">Pinjam Buku</button>
-
-                        </div>
-
-                        <!-- Peminjaman Modal-->
-                        <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Peminjaman</h5>
-                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Apakah kamu yakin ingin melakukan peminjaman?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
-                                        <button class="btn btn-primary" type="submit">Ya</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Button Pinjam -->
+                    <?php
+                        $isOnCart = false;
+                        if ($this->cart->total_items()!== 0){
+                            foreach ($this->cart->contents() as $item){
+                                if ($item['id']== $b->ID_BUKU){
+                                    $isOnCart = true;
+                                } 
+                            }
+                        } ?>
+                        
+                        <?php if ($isOnCart):?>
+                            <input class="id-buku" type="hidden" value="<?= $b->ID_BUKU?>"/>
+                            <button class="btn btn-cart-delete btn-block btn-danger ml-2 flex-fill">
+                                <i class="fas fa-trash mr-2"></i>Hapus
+                            </button>
+                        <?php else:?>
+                            <button class="btn btn-pinjam btn-block btn-primary ml-2 flex-fill" <?=($b->STATUS_BUKU=='Tersedia')? '' : 'disabled';?>>
+                                <i class="fas fa-plus mr-2"></i>Pinjam
+                            </button>
+                        <?php endif;?>
+                   
                 </div>
                 <?php endforeach; ?>
             </div>
             </form>
         </div>
     </div>
-                        
-
-</div>
-        
 </div>
 <!-- End of Main Content -->
+            
+<!-- Footer -->
+<?php include 'footer.php';?>
 
 <!-- Start Barcode Script -->
 <script src="<?php echo base_url('assets/js/JsBarcode.code128.min.js')?>"></script>
@@ -129,6 +107,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         initBarcode(value);
     };
     </script>
-            
-
-            

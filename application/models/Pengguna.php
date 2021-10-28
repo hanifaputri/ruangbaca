@@ -2,14 +2,6 @@
 
 class Pengguna extends CI_Model{
 
-public $idUser;
-public $namaUser;
-public $emailUser;
-public $password;
-public $createdAt;
-public $updatedAt;
-
-
 	public function checkDataUser($emailUser)
 	{
 		$query=$this->db->query("select * from pengguna where EMAIL_USER='$emailUser'");

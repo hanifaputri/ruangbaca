@@ -90,19 +90,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="card-footer">
                 <div class="form-group">
                     <div class="custom-control custom-checkbox mr-sm-2">
-                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing" required>
                         <label class="custom-control-label" for="customControlAutosizing">
                             Saya menyetujui syarat dan ketentuan yang berlaku
                         </label>
                     </div>
                 </div>
-                <button type="submit" name="peminjaman" class="btn btn-block btn-primary">Pinjam Buku</button>
+                <button type="button" data-toggle="modal" data-target="#submitModal" class="btn btn-block btn-primary">Pinjam Buku</button>
+                
+                <!-- <button type="submit" name="peminjaman" class="btn btn-block btn-primary">Pinjam Buku</button> -->
+            
+                <!-- Peminjaman Modal-->
+                <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Peminjaman</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Apakah kamu yakin ingin melakukan peminjaman?
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
+                                <button class="btn btn-primary" type="submit">Ya</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             </form>
         </div>
     </div>
-                        
-        
 </div>
 <!-- End of Main Content -->
 

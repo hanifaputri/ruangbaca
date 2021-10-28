@@ -38,6 +38,7 @@ $(document).ready(function(){
     // Add to Cart 
     $('.btn-pinjam').click(function(){
         let id = $(this).parents('.book-item').find('.id-buku').val();
+        // let id = $('.id-buku').val();
         // console.log(id);
 
         $.ajax({
@@ -62,8 +63,8 @@ $(document).ready(function(){
     });
 
     $('.btn-cart-delete').click(function(){
-        let id = $('.cart-id').val();
-        // let id = $(this).parents('.cart-item').find('.cart-id').val();
+        // let id = $('.cart-id').val();
+        let id = $(this).parents('.cart-item').find('.cart-id').val();
 
         // console.log(id);
         $.ajax({
@@ -71,6 +72,7 @@ $(document).ready(function(){
             data:{id : id},
             method:'POST',
             success:function(data) {
+                // console.log(id);
                 // $('.cart-content').html(data);
                 // $('.dropdown-toggle').dropdown();
                 location.reload();
@@ -131,7 +133,7 @@ $(document).ready(function(){
                                 </div>
 
                                 <a style="cursor:pointer;" class="dropdown-item text-center small text-gray-500"
-                                onClick="window.location='<?= base_url('/peminjamancontroller/viewdetailpeminjaman');?>'">
+                                onClick="window.location='<?= base_url('/peminjaman/detail');?>'">
                                     Lihat Semua Peminjaman
                                 </a>
                                <!-- /peminjamanController/resetCart -->

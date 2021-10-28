@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-
-
+<!-- Header -->
+<?php include 'header.php';?>
 
 <style>
     .jumbotron-top {
@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!-- Begin Page Content -->
 
 <!-- Page Heading -->
-<div class="jumbotron-top  d-flex flex-column justify-content-center align-items-center p-4">
+<div class="jumbotron-top d-flex flex-column justify-content-center align-items-center p-4">
     <div class="p-4">
         <h1 class="h1 text-light font-weight-bold text-center">Mau cari buku apa?</h1>
     </div>   
@@ -103,10 +103,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="row mt-4">
         <!-- Book List-->
         <?php foreach($buku as $b) : ?>
+        <?php
+        $isOnCart = false;
+        $rowId = 0;
+
+        if ($this->cart->total_items()!== 0){
+            foreach ($this->cart->contents() as $item){
+                if ($item['id']== $b->ID_BUKU){
+                    $isOnCart = true;
+                    $rowId = $item['rowid'];
+                } 
+            }
+        }?>
         <div class="col-xl-2 col-md-3 col-sm-4 mb-4">
-            <div class="card book-item shadow h-100">
+            <div class="card card-item book-item shadow h-100">
                 <div class="card-body p-3">
                     <input class="id-buku" type="hidden" value="<?= $b->ID_BUKU?>"/>
+                    
+                    <?php if($isOnCart && $rowId):?>
+                        <input class="cart-id" type="hidden" value="<?= $rowId?>"/>
+                    <?php endif;?>
 
                     <img style="height:240px; width:100%; object-fit: cover;" class="mb-4 img-thumbnail" src="<?= $b->URL_IMG_BUKU?>" />
                     <span class="badge badge-secondary mb-2"><?= $b->NAMA_KATEGORI?></span>
@@ -130,46 +146,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <!-- <div class="card-footer row"> -->
                 <div class="card-footer">
                     <div class="btn-toolbar d-flex flex-row">
-                    <!-- <div class="col-xs-4 p-0"> -->
                         <!-- Button Lihat -->
-                        <a href="<?= base_url('/peminjaman/' . $b->ID_BUKU);?>">
-                            <button type="button" class="btn btn-block btn-secondary" <?php echo ($b->STATUS_BUKU=='Tersedia')? '' : 'disabled';?> >
+                        <a href="<?= base_url('/buku/' . $b->ID_BUKU);?>">
+                            <button type="button" class="btn btn-block btn-secondary">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </a>
-                    <!-- <div class="col-xs-8 p-0"> -->
-                        <!-- Button Pinjam -->
-                        <?php
-                        $isOnCart = false;
-                        if ($this->cart->total_items()!== 0){
-                            foreach ($this->cart->contents() as $item){
-                                if ($item['id']== $b->ID_BUKU){
-                                    $isOnCart = true;
-                                } 
-                            }
-                        } 
-                        if ($isOnCart == true) {
-                            echo "
-                            <input class='id-buku' type='hidden' value='<?= $b->ID_BUKU?>'/>
-                            ";
-                            echo "
-                            <a class='btn btn-cart-delete btn-danger ml-2 flex-fill'>
-                                <i class='fas fa-trash mr-2'></i>Hapus
-                            </a>";
-                        } else {
-                            echo "
-                            <a class='btn btn-pinjam btn-primary ml-2 flex-fill'>
-                                <i class='fas fa-plus mr-2'></i>Pinjam
-                            </a>";
-                        }
-                        ?>
+                   
+                        <?php if ($isOnCart):?>
+                            <input class="id-buku" type="hidden" value="<?= $b->ID_BUKU?>"/>
+                            <button class="btn btn-cart-delete btn-danger ml-2 flex-fill">
+                                <i class="fas fa-trash mr-2"></i>Hapus
+                            </button>
+                        <?php else:?>
+                            <button class="btn btn-pinjam btn-primary ml-2 flex-fill" <?=($b->STATUS_BUKU=='Tersedia')? '' : 'disabled';?>>
+                                <i class="fas fa-plus mr-2"></i>Pinjam
+                            </button>
+                        <?php endif;?>
                         
                     </div>
                 </div>
             </div>
         </div>
         <?php endforeach; ?>
-        <!-- End Book List --.
+        <!-- End Book List -->
     </div>
 
     <!-- Empty State -->

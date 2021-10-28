@@ -43,6 +43,7 @@ class Buku extends CI_Model {
             BUKU.URL_IMG_BUKU, 
             BUKU.ID_PENERBIT, 
             BUKU.PENULIS,
+            BUKU.STATUS_BUKU,
             PENERBIT.NAMA_PENERBIT, 
             BUKU.ID_KATEGORI, 
             KATEGORI.NAMA_KATEGORI, 

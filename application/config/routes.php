@@ -58,7 +58,8 @@ $route['home/search'] = 'peminjamanController/search';
 
 $route['peminjaman/(:num)'] = 'peminjamanController/viewDetailBuku/$1';
 $route['peminjaman/success'] = 'peminjamanController/peminjamanBerhasil';
-$route['pengembalian'] = 'pengembalianController';
+$route['pengembalian'] = 'PengembalianController';
+$route['pengembalian/(:num)'] = 'PengembalianController/returnBuku/$1';
 $route['register'] = 'PendaftaranController';
 $route['login'] = 'LoginController';
 $route['logout'] = 'LoginController/logout';

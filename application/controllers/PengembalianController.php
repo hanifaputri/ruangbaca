@@ -30,12 +30,8 @@ class PengembalianController extends CI_Controller {
 
     public function returnBuku($id)
     {
-        $data = array(
-            'rowid' => $id,
-            'qty'   => 0
-        );
+        $this->peminjaman->updateTglKembali($id);
 
-        $this->cart->update($data);
         redirect('/pengembalian');
     }
 }

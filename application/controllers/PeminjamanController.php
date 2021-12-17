@@ -130,6 +130,8 @@ class PeminjamanController extends CI_Controller {
 		// var_dump($data);
 		$data = array();
 		$post = $this->input->post();
+
+		$idUser = $this->session->userdata('id');
 		
 		foreach ($post['idUser'] as $key => $value) {
 			if(isset($post['idUser'][$key])){
@@ -142,12 +144,9 @@ class PeminjamanController extends CI_Controller {
 			}
 		}
 		// var_dump($data);
-		$status = $this->peminjaman->insertAllPeminjaman($data);
-		if ($status){
-			$this->cart->destroy();
-			redirect('/peminjaman/success');
-		} else {
-			echo "Gagal";
-		}
+		$status = $this->peminjaman->insertAllPeminjaman($data, $idUser);
+		$this->cart->destroy();
+		redirect('/peminjaman/success');
+		
 	}
 }
